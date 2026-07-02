@@ -21,9 +21,7 @@ describe('CurrenciesService', () => {
 
   it('throws ConflictException when the currency already exists (case-insensitive)', () => {
     service.create({ currency: 'GBP', monthlyFeeGbp: 50 });
-    expect(() => service.create({ currency: 'gbp', monthlyFeeGbp: 60 })).toThrow(
-      ConflictException,
-    );
+    expect(() => service.create({ currency: 'gbp', monthlyFeeGbp: 60 })).toThrow(ConflictException);
   });
 
   it('throws NotFoundException from getOrThrow when currency is missing', () => {

@@ -21,13 +21,15 @@ describe('BillingService', () => {
     currenciesService.create({ currency: 'GBP', monthlyFeeGbp: 50 });
   });
 
-  function createAccount(overrides: Partial<{
-    accountId: string;
-    currency: string;
-    transactionThreshold: number;
-    discountDays: number;
-    discountRate: number;
-  }> = {}) {
+  function createAccount(
+    overrides: Partial<{
+      accountId: string;
+      currency: string;
+      transactionThreshold: number;
+      discountDays: number;
+      discountRate: number;
+    }> = {},
+  ) {
     return accountsService.create({
       accountId: 'acc-1',
       currency: 'GBP',

@@ -27,10 +27,7 @@ export class AccountsController {
 
   @Post(':accountId/bill')
   @HttpCode(HttpStatus.OK)
-  bill(
-    @Param('accountId') accountId: string,
-    @Body() dto: BillRequestDto,
-  ): BillResponse {
+  bill(@Param('accountId') accountId: string, @Body() dto: BillRequestDto): BillResponse {
     return this.billingService.calculateBill(accountId, dto);
   }
 }
