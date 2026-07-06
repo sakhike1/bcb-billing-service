@@ -55,7 +55,7 @@ export class BillingService {
 
     const totalPeriodMs = periodEnd.getTime() - periodStart.getTime();
     const overlapMillis = overlapMs(periodStart, periodEnd, discountWindowStart, discountWindowEnd);
-    const applicableFraction = overlapMillis / totalPeriodMs;
+    const applicableFraction = totalPeriodMs > 0 ? overlapMillis / totalPeriodMs : 0;
 
     const discountAmountGbp = subtotalGbp * applicableFraction * account.discountRate;
 
