@@ -32,4 +32,13 @@ describe('CurrenciesService', () => {
     service.create({ currency: 'GBP', monthlyFeeGbp: 50 });
     expect(service.getOrThrow('gbp').currency).toBe('GBP');
   });
+
+  it('findAll returns all registered currencies', () => {
+    service.create({ currency: 'GBP', monthlyFeeGbp: 50 });
+    service.create({ currency: 'USD', monthlyFeeGbp: 40 });
+    const list = service.findAll();
+    expect(list).toHaveLength(2);
+    expect(list.map((c) => c.currency)).toContain('GBP');
+    expect(list.map((c) => c.currency)).toContain('USD');
+  });
 });

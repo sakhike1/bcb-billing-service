@@ -67,4 +67,26 @@ describe('AccountsService', () => {
   it('throws NotFoundException from getOrThrow for an unknown account', () => {
     expect(() => accountsService.getOrThrow('missing')).toThrow(NotFoundException);
   });
+
+  it('findAll returns all created accounts', () => {
+    currenciesService.create({ currency: 'GBP', monthlyFeeGbp: 50 });
+    accountsService.create({
+      accountId: 'acc-1',
+      currency: 'GBP',
+      transactionThreshold: 100,
+      discountDays: 30,
+      discountRate: 0.1,
+    });
+    accountsService.create({
+      accountId: 'acc-2',
+      currency: 'GBP',
+      transactionThreshold: 50,
+      discountDays: 0,
+      discountRate: 0,
+    });
+    const list = accountsService.findAll();
+    expect(list).toHaveLength(2);
+    expect(list.map((a) => a.accountId)).toContain('acc-1');
+    expect(list.map((a) => a.accountId)).toContain('acc-2');
+  });
 });
